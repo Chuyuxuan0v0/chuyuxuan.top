@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SDD驱动AI开发：当Open Spec遇上Superpowers | CHUYUXUAN</title><meta name="author" content="chuyuxuan"><meta name="copyright" content="chuyuxuan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="SDD驱动AI开发：当Open Spec遇上Superpowers “Too simple to need a design” is always wrong.— Superpowers 工作流的第一条铁律  前言：Vibe Coding 的困境2025年以来，”Vibe Coding”成了最火热的开发范式——对着AI说几句话，代码就出来了。Cursor、Copilot、Claude Code……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SDD驱动AI开发：当Open Spec遇上Superpowers">
+<meta property="og:url" content="https://blog.chuyuxuan.top/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="CHUYUXUAN">
+<meta property="og:description" content="SDD驱动AI开发：当Open Spec遇上Superpowers “Too simple to need a design” is always wrong.— Superpowers 工作流的第一条铁律  前言：Vibe Coding 的困境2025年以来，”Vibe Coding”成了最火热的开发范式——对着AI说几句话，代码就出来了。Cursor、Copilot、Claude Code……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200">
+<meta property="article:published_time" content="2026-05-30T10:11:33.000Z">
+<meta property="article:modified_time" content="2026-05-30T10:29:56.339Z">
+<meta property="article:author" content="chuyuxuan">
+<meta property="article:tag" content="AI开发">
+<meta property="article:tag" content="SDD">
+<meta property="article:tag" content="Superpowers">
+<meta property="article:tag" content="Open Spec">
+<meta property="article:tag" content="Vibe Coding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200"><link rel="shortcut icon" href="/img/favicon1.ico"><link rel="canonical" href="https://blog.chuyuxuan.top/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?66e8bfee2641f792cfb4b22b2cf76e0e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SDD驱动AI开发：当Open Spec遇上Superpowers',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-05-30 18:29:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">78</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-book"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="CHUYUXUAN"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-book"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SDD驱动AI开发：当Open Spec遇上Superpowers</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-30T10:11:33.000Z" title="发表于 2026-05-30 18:11:33">2026-05-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-30T10:29:56.339Z" title="更新于 2026-05-30 18:29:56">2026-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/">AI工程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SDD驱动AI开发：当Open Spec遇上Superpowers"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.3.1/dist/hexo-tag-hint.min.css"><h1 id="SDD驱动AI开发：当Open-Spec遇上Superpowers"><a href="#SDD驱动AI开发：当Open-Spec遇上Superpowers" class="headerlink" title="SDD驱动AI开发：当Open Spec遇上Superpowers"></a>SDD驱动AI开发：当Open Spec遇上Superpowers</h1><blockquote>
+<p>“Too simple to need a design” is always wrong.<br>— Superpowers 工作流的第一条铁律</p>
+</blockquote>
+<h2 id="前言：Vibe-Coding-的困境"><a href="#前言：Vibe-Coding-的困境" class="headerlink" title="前言：Vibe Coding 的困境"></a>前言：Vibe Coding 的困境</h2><p>2025年以来，”Vibe Coding”成了最火热的开发范式——对着AI说几句话，代码就出来了。Cursor、Copilot、Claude Code……工具越来越多，AI越来越聪明。</p>
+<p>但你有没有发现一个诡异的现象：</p>
+<p><strong>AI写的代码越来越快，项目却越来越乱。</strong></p>
+<ul>
+<li>第一天：哇，AI帮我5分钟写了个登录页面！</li>
+<li>第一周：嗯，重构一下这个组件……等等，它改了三个不相关的文件？</li>
+<li>第一个月：这个项目的代码到底是谁写的？——是你，也是AI，但现在谁也看不懂了。</li>
+</ul>
+<p>问题出在哪？不是AI不够强，而是<strong>我们给AI的方式不对</strong>。</p>
+<p>我们给AI的是模糊的自然语言指令，期待它产出精确的工程代码。这就像你对施工队说”帮我盖个好看的房子”，然后期待他们交出一份完美的建筑图纸。</p>
+<p><strong>SDD（Spec-Driven Development，规格驱动开发）</strong> 正是为了解决这个问题而生的。</p>
+<hr>
+<h2 id="什么是SDD？"><a href="#什么是SDD？" class="headerlink" title="什么是SDD？"></a>什么是SDD？</h2><p>SDD的核心思想只有一句话：</p>
+<blockquote>
+<p><strong>先写规格（Spec），再写代码（Code）。</strong></p>
+</blockquote>
+<p>这不是什么新概念。软件工程几十年来一直在讲”需求分析”、”概要设计”、”详细设计”。但在AI时代，Spec的意义发生了根本变化：</p>
+<p><strong>过去：</strong> Spec是给人看的文档，写完就扔，代码才是真相。<br><strong>现在：</strong> Spec是给AI的指令，Spec就是真相，代码只是它的实现。</p>
+<p>在AI辅助开发中，Spec不再是”可选的文档”，而是<strong>驱动整个开发流程的唯一输入</strong>。</p>
+<h3 id="SDD-vs-传统开发-vs-Vibe-Coding"><a href="#SDD-vs-传统开发-vs-Vibe-Coding" class="headerlink" title="SDD vs 传统开发 vs Vibe Coding"></a>SDD vs 传统开发 vs Vibe Coding</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统开发</th>
+<th>Vibe Coding</th>
+<th>SDD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入</td>
+<td>需求文档 + 架构设计</td>
+<td>自然语言 Prompt</td>
+<td>结构化 Spec</td>
+</tr>
+<tr>
+<td>开发主体</td>
+<td>人类程序员</td>
+<td>AI（人类监督）</td>
+<td>AI（Spec 驱动）</td>
+</tr>
+<tr>
+<td>质量保障</td>
+<td>Code Review</td>
+<td>基本没有</td>
+<td>Spec Review + Code Review</td>
+</tr>
+<tr>
+<td>可复现性</td>
+<td>高（有代码）</td>
+<td>低（Prompt模糊）</td>
+<td>高（Spec可重放）</td>
+</tr>
+<tr>
+<td>协作方式</td>
+<td>人-人</td>
+<td>人-AI</td>
+<td>Spec-AI</td>
+</tr>
+<tr>
+<td>核心资产</td>
+<td>代码</td>
+<td>Prompt</td>
+<td>Spec</td>
+</tr>
+</tbody></table>
+<p>SDD本质上是一种<strong>人机协作的契约</strong>：人类负责思考和定义（写Spec），AI负责执行和实现（写代码）。</p>
+<hr>
+<h2 id="Open-Spec：让Spec成为一等公民"><a href="#Open-Spec：让Spec成为一等公民" class="headerlink" title="Open Spec：让Spec成为一等公民"></a>Open Spec：让Spec成为一等公民</h2><p>“Open Spec”不是一个具体的产品或工具，而是一种<strong>开放的规格定义方法论</strong>。它的核心主张是：</p>
+<h3 id="1-Spec应该是机器可读的"><a href="#1-Spec应该是机器可读的" class="headerlink" title="1. Spec应该是机器可读的"></a>1. Spec应该是机器可读的</h3><p>传统的PRD（产品需求文档）是写给人看的Word文档，充满了模糊的表述：”用户体验要好”、”加载速度要快”、”界面要美观”。</p>
+<p>Open Spec要求Spec是<strong>结构化的、无歧义的</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 传统PRD</span></span><br><span class="line"><span class="string">&quot;用户可以注册账号&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Open Spec</span></span><br><span class="line"><span class="attr">auth.register:</span></span><br><span class="line">  <span class="attr">input:</span></span><br><span class="line">    <span class="attr">email:</span> <span class="string">string,</span> <span class="string">required,</span> <span class="attr">format:</span> <span class="string">email</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">string,</span> <span class="string">required,</span> <span class="attr">min_length:</span> <span class="number">8</span><span class="string">,</span> <span class="attr">must_contain:</span> [<span class="string">upper</span>, <span class="string">lower</span>, <span class="string">digit</span>]</span><br><span class="line">  <span class="attr">output:</span></span><br><span class="line">    <span class="attr">success:</span> &#123; <span class="attr">user_id:</span> <span class="string">uuid</span>, <span class="attr">token:</span> <span class="string">jwt</span> &#125;</span><br><span class="line">    <span class="attr">failure:</span> &#123; <span class="attr">error:</span> <span class="string">enum</span>[<span class="string">email_taken</span>, <span class="string">invalid_format</span>, <span class="string">weak_password</span>] &#125;</span><br><span class="line">  <span class="attr">behavior:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">发送验证邮件</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">密码使用</span> <span class="string">bcrypt</span> <span class="string">哈希存储</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">速率限制:</span> <span class="number">5</span><span class="string">次/分钟/IP</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Spec应该是版本化的"><a href="#2-Spec应该是版本化的" class="headerlink" title="2. Spec应该是版本化的"></a>2. Spec应该是版本化的</h3><p>Spec和代码一样，需要版本控制。当需求变更时，我们修改Spec，然后让AI重新生成受影响的代码。</p>
+<h3 id="3-Spec应该是可测试的"><a href="#3-Spec应该是可测试的" class="headerlink" title="3. Spec应该是可测试的"></a>3. Spec应该是可测试的</h3><p>每一条Spec都应该能直接转化为测试用例。Spec说”密码最少8位”，那测试就应该验证7位密码被拒绝。</p>
+<h3 id="4-Spec应该是开放共享的"><a href="#4-Spec应该是开放共享的" class="headerlink" title="4. Spec应该是开放共享的"></a>4. Spec应该是开放共享的</h3><p>好的Spec模式可以被复用。认证模块的Spec、分页组件的Spec、RESTful API的Spec……这些模式可以被社区共享和改进。</p>
+<hr>
+<h2 id="Superpowers：SDD的工程化实现"><a href="#Superpowers：SDD的工程化实现" class="headerlink" title="Superpowers：SDD的工程化实现"></a>Superpowers：SDD的工程化实现</h2><p><a target="_blank" rel="noopener" href="https://github.com/obra/superpowers">Superpowers</a> 是一个将SDD理念落地的工作流框架。它定义了一套<strong>严格的开发管线</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Idea → Brainstorm → Plan → Subagent-Driven Build (TDD) → Code Review → Finish Branch</span><br></pre></td></tr></table></figure>
+
+<p>让我们逐个拆解。</p>
+<h3 id="Phase-1-Brainstorming（头脑风暴）"><a href="#Phase-1-Brainstorming（头脑风暴）" class="headerlink" title="Phase 1: Brainstorming（头脑风暴）"></a>Phase 1: Brainstorming（头脑风暴）</h3><p><strong>铁律：不碰任何代码。</strong></p>
+<p>当你说”我要做一个XXX”时，Superpowers不会让AI立刻开始写代码。它会：</p>
+<ol>
+<li><strong>探索项目上下文</strong> — 读代码、读文档、看最近的提交</li>
+<li><strong>逐个提问</strong> — 一次只问一个问题，优先提供选择题</li>
+<li><strong>提出2-3个方案</strong> — 每个方案有明确的优劣分析和推荐</li>
+<li><strong>逐段审批</strong> — 设计分段呈现，每段都需要你确认</li>
+<li><strong>输出设计文档</strong> — 保存到 <code>docs/plans/YYYY-MM-DD-&lt;topic&gt;-design.md</code></li>
+</ol>
+<blockquote>
+<p>💡 <strong>关键洞察：</strong> 这个阶段的价值不在于”设计文档”本身，而在于<strong>迫使你思考清楚</strong>。很多bug的根源不是代码写错了，而是需求想错了。</p>
+</blockquote>
+<h3 id="Phase-2-Writing-Plans（编写计划）"><a href="#Phase-2-Writing-Plans（编写计划）" class="headerlink" title="Phase 2: Writing Plans（编写计划）"></a>Phase 2: Writing Plans（编写计划）</h3><p>设计通过后，进入计划阶段。Superpowers会：</p>
+<ul>
+<li>将设计拆解为<strong>细粒度的任务</strong></li>
+<li>每个任务控制在 <strong>2-5分钟</strong> 的执行时间</li>
+<li>每个任务遵循 TDD 循环：<strong>写测试 → 看失败 → 实现 → 看通过 → 提交</strong></li>
+</ul>
+<p>这种粒度的设计是有原因的——它让每个任务都是<strong>可验证的</strong>。你不需要等到最后才知道哪里出了问题。</p>
+<h3 id="Phase-3-Subagent-Driven-Development（子代理驱动开发）"><a href="#Phase-3-Subagent-Driven-Development（子代理驱动开发）" class="headerlink" title="Phase 3: Subagent-Driven Development（子代理驱动开发）"></a>Phase 3: Subagent-Driven Development（子代理驱动开发）</h3><p>这是Superpowers最酷的部分。每个任务不是由一个AI完成的，而是由<strong>三个子代理协作</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────┐     ┌──────────────┐     ┌──────────────┐</span><br><span class="line">│  Implementer │ ──→ │ Spec Reviewer │ ──→ │ Code Reviewer │</span><br><span class="line">│  （实现者）   │     │ （规格审查者） │     │ （代码审查者） │</span><br><span class="line">└─────────────┘     └──────────────┘     └──────────────┘</span><br><span class="line">     ↓                      ↓                     ↓</span><br><span class="line">   写代码              检查是否符合Spec        检查代码质量</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Implementer：</strong> 根据任务描述和Spec编写代码，严格遵循TDD</li>
+<li><strong>Spec Reviewer：</strong> 确认代码完全符合Spec要求，不多不少</li>
+<li><strong>Code Reviewer：</strong> 检查代码质量、风格、潜在问题</li>
+</ul>
+<p>三个角色互相制衡，就像现实中的团队协作一样。</p>
+<h3 id="Phase-4-Systematic-Debugging（系统化调试）"><a href="#Phase-4-Systematic-Debugging（系统化调试）" class="headerlink" title="Phase 4: Systematic Debugging（系统化调试）"></a>Phase 4: Systematic Debugging（系统化调试）</h3><p>出了bug？Superpowers不允许”试试这个修一下”式的碰运气。</p>
+<p><strong>铁律：不找到根因，不写任何修复代码。</strong></p>
+<p>调试流程：</p>
+<ol>
+<li><strong>根因调查</strong> — 读错误信息、复现问题、检查最近变更、追踪数据流</li>
+<li><strong>模式分析</strong> — 找到正常工作的例子，对比差异</li>
+<li><strong>假设-验证</strong> — 一次只验证一个假设</li>
+<li><strong>修复-验证</strong> — 从根因修复，确认不引入新问题</li>
+</ol>
+<h3 id="Phase-5-Finishing-Branch（完成分支）"><a href="#Phase-5-Finishing-Branch（完成分支）" class="headerlink" title="Phase 5: Finishing Branch（完成分支）"></a>Phase 5: Finishing Branch（完成分支）</h3><p>所有任务完成、所有测试通过后：</p>
+<ul>
+<li>确认所有测试通过</li>
+<li>选择：本地合并 &#x2F; 推送PR &#x2F; 保留分支 &#x2F; 丢弃</li>
+<li>清理</li>
+</ul>
+<hr>
+<h2 id="实战：一个SDD驱动的开发示例"><a href="#实战：一个SDD驱动的开发示例" class="headerlink" title="实战：一个SDD驱动的开发示例"></a>实战：一个SDD驱动的开发示例</h2><p>假设你要开发一个”用户待办事项”功能。</p>
+<h3 id="❌-Vibe-Coding-方式"><a href="#❌-Vibe-Coding-方式" class="headerlink" title="❌ Vibe Coding 方式"></a>❌ Vibe Coding 方式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">你：帮我写一个待办事项功能</span><br><span class="line">AI：好的！[哗啦哗啦生成200行代码]</span><br><span class="line">你：嗯……加个截止日期？</span><br><span class="line">AI：好的！[改了5个文件]</span><br><span class="line">你：等等，之前的排序逻辑好像坏了？</span><br><span class="line">AI：让我看看……[又改了3个文件]</span><br></pre></td></tr></table></figure>
+
+<h3 id="✅-SDD-Superpowers-方式"><a href="#✅-SDD-Superpowers-方式" class="headerlink" title="✅ SDD + Superpowers 方式"></a>✅ SDD + Superpowers 方式</h3><p><strong>Step 1: Brainstorm</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">AI: 我来了解一下项目上下文……你的项目用的是什么技术栈？</span><br><span class="line">你: React + TypeScript + Zustand</span><br><span class="line">AI: 了解。关于待办事项，你希望支持哪些操作？</span><br><span class="line">    A. 基础CRUD（增删改查）</span><br><span class="line">    B. A + 标签/分类</span><br><span class="line">    C. B + 截止日期 + 优先级</span><br><span class="line">你: C</span><br><span class="line">AI: 数据存储方案呢？</span><br><span class="line">    A. 本地 localStorage</span><br><span class="line">    B. 后端API</span><br><span class="line">    C. 先本地，预留API接口</span><br><span class="line">你: C</span><br><span class="line">AI: 好的，我来输出设计文档……</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 2: Spec → Plan</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## Task 1: 数据模型 (2min)</span></span><br><span class="line"><span class="bullet">-</span> 定义 Todo 类型: &#123; id, title, completed, priority, dueDate, tags &#125;</span><br><span class="line"><span class="bullet">-</span> 写测试：创建 Todo 实例，验证所有字段</span><br><span class="line"></span><br><span class="line"><span class="section">## Task 2: Store 实现 (3min)</span></span><br><span class="line"><span class="bullet">-</span> Zustand store: addTodo, toggleTodo, deleteTodo, updateTodo</span><br><span class="line"><span class="bullet">-</span> 写测试：每个 action 的行为验证</span><br><span class="line"></span><br><span class="line"><span class="section">## Task 3: 列表组件 (3min)</span></span><br><span class="line"><span class="bullet">-</span> TodoList 组件渲染</span><br><span class="line"><span class="bullet">-</span> 写测试：空列表、有数据、完成状态筛选</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 3: 子代理执行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Implementer 子代理] 完成 Task 1: 数据模型 ✅</span><br><span class="line">[Spec Reviewer 子代理] 验证：数据模型完全符合 Spec ✅</span><br><span class="line">[Code Reviewer 子代理] 代码质量：类型定义清晰，无问题 ✅</span><br><span class="line"></span><br><span class="line">[Implementer 子代理] 完成 Task 2: Store 实现 ✅</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>每一步都有记录，每一步都可验证，每一步都可回溯。</p>
+<hr>
+<h2 id="SDD的核心优势"><a href="#SDD的核心优势" class="headerlink" title="SDD的核心优势"></a>SDD的核心优势</h2><h3 id="1-Spec即文档"><a href="#1-Spec即文档" class="headerlink" title="1. Spec即文档"></a>1. Spec即文档</h3><p>传统开发中，文档永远是过时的。SDD中，Spec就是开发的起点，它永远不会过时——因为代码是根据它生成的。</p>
+<h3 id="2-AI的确定性"><a href="#2-AI的确定性" class="headerlink" title="2. AI的确定性"></a>2. AI的确定性</h3><p>AI的输出质量取决于输入质量。模糊的Prompt产出模糊的代码，精确的Spec产出精确的代码。SDD把”模糊”从方程中移除了。</p>
+<h3 id="3-可审计性"><a href="#3-可审计性" class="headerlink" title="3. 可审计性"></a>3. 可审计性</h3><p>每一个变更都可以追溯到Spec中的哪一条需求。出了问题，你不需要考古代码，只需要检查Spec。</p>
+<h3 id="4-真正的TDD"><a href="#4-真正的TDD" class="headerlink" title="4. 真正的TDD"></a>4. 真正的TDD</h3><p>很多人说”我们要做TDD”，但实际执行时总是”先写代码，再补测试”。SDD+Superpowers的流程从结构上保证了TDD的执行——因为Plan中每个任务的第一步就是”写测试”。</p>
+<h3 id="5-人机协作的最佳分工"><a href="#5-人机协作的最佳分工" class="headerlink" title="5. 人机协作的最佳分工"></a>5. 人机协作的最佳分工</h3><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>人类</td>
+<td>思考、定义、决策、审批</td>
+</tr>
+<tr>
+<td>AI</td>
+<td>执行、实现、测试、审查</td>
+</tr>
+</tbody></table>
+<p>人类做人类擅长的事（创造性思考），AI做AI擅长的事（快速实现）。</p>
+<hr>
+<h2 id="SDD的边界与挑战"><a href="#SDD的边界与挑战" class="headerlink" title="SDD的边界与挑战"></a>SDD的边界与挑战</h2><p>SDD不是银弹。它有明确的适用边界：</p>
+<h3 id="适合SDD的场景"><a href="#适合SDD的场景" class="headerlink" title="适合SDD的场景"></a>适合SDD的场景</h3><ul>
+<li>✅ 新功能开发</li>
+<li>✅ 有明确需求的项目</li>
+<li>✅ 需要多人&#x2F;AI协作的场景</li>
+<li>✅ 对质量有要求的生产代码</li>
+</ul>
+<h3 id="不太适合的场景"><a href="#不太适合的场景" class="headerlink" title="不太适合的场景"></a>不太适合的场景</h3><ul>
+<li>❌ 快速原型&#x2F;一次性脚本</li>
+<li>❌ 探索性编程（还不知道自己要什么）</li>
+<li>❌ 单行修复（不需要完整流程）</li>
+<li>❌ 非代码任务</li>
+</ul>
+<h3 id="实践中的挑战"><a href="#实践中的挑战" class="headerlink" title="实践中的挑战"></a>实践中的挑战</h3><ol>
+<li><strong>写好Spec是一种能力</strong> — 需要练习，初期可能觉得”写Spec比写代码还慢”</li>
+<li><strong>不是所有需求都能精确定义</strong> — 有些东西就是需要边做边调整</li>
+<li><strong>工具链还在成熟中</strong> — SDD的工具生态还在早期</li>
+</ol>
+<hr>
+<h2 id="未来展望：Spec-First-的AI原生开发"><a href="#未来展望：Spec-First-的AI原生开发" class="headerlink" title="未来展望：Spec-First 的AI原生开发"></a>未来展望：Spec-First 的AI原生开发</h2><p>我们正在见证软件开发范式的转变：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Code-First → Prompt-First → Spec-First</span><br><span class="line">（代码优先）  （提示优先）    （规格优先）</span><br></pre></td></tr></table></figure>
+
+<p><strong>Code-First时代（~2020）：</strong> 程序员写代码，文档是附属品。<br><strong>Prompt-First时代（2023-2025）：</strong> 用自然语言驱动AI写代码，但Prompt是模糊的、临时的。<br><strong>Spec-First时代（2025+）：</strong> Spec是精确的、持久的、可版本控制的，AI根据Spec生成和维护代码。</p>
+<p>在这个范式下，**”会写Spec”将成为比”会写代码”更重要的技能**。</p>
+<p>而Superpowers这样的工作流框架，为Spec-First开发提供了工程化的实践路径。它不只是一个”AI编程技巧”，而是一种<strong>新的软件工程方法论</strong>。</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>SDD不是要取代Vibe Coding，而是为它加上了<strong>工程化的护栏</strong>。</p>
+<p>如果你只是在写一个周末小项目，Vibe Coding完全够用。<br>但如果你在构建一个需要维护、需要协作、需要质量的项目——SDD值得你认真考虑。</p>
+<p><strong>先想清楚，再动手。先写Spec，再写代码。</strong></p>
+<p>这不是新道理，但在AI时代，它比以往任何时候都更重要。</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/obra/superpowers">Superpowers - GitHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/openclaw/openclaw/tree/main/skills/superpowers">Superpowers - OpenClaw Edition</a></li>
+<li><a target="_blank" rel="noopener" href="https://openclaw.ai/">OpenClaw</a> — AI Agent 运行时</li>
+<li><a target="_blank" rel="noopener" href="https://clawhub.com/">ClawHub</a> — Agent 技能市场</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.chuyuxuan.top">chuyuxuan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.chuyuxuan.top/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/">https://blog.chuyuxuan.top/2026/05/30/来仔细聊聊SSD驱动开发/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.chuyuxuan.top" target="_blank">CHUYUXUAN</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI%E5%BC%80%E5%8F%91/">AI开发</a><a class="post-meta__tags" href="/tags/SDD/">SDD</a><a class="post-meta__tags" href="/tags/Superpowers/">Superpowers</a><a class="post-meta__tags" href="/tags/Open-Spec/">Open Spec</a><a class="post-meta__tags" href="/tags/Vibe-Coding/">Vibe Coding</a></div><div class="post_share"><div class="social-share" data-image="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2026/04/30/Hermes-agent-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="Hermes Agent 的安装与使用"><img class="cover" src="https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hermes Agent 的安装与使用</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">chuyuxuan</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">78</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Chuyuxuan0v0"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDD%E9%A9%B1%E5%8A%A8AI%E5%BC%80%E5%8F%91%EF%BC%9A%E5%BD%93Open-Spec%E9%81%87%E4%B8%8ASuperpowers"><span class="toc-number">1.</span> <span class="toc-text">SDD驱动AI开发：当Open Spec遇上Superpowers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9AVibe-Coding-%E7%9A%84%E5%9B%B0%E5%A2%83"><span class="toc-number">1.1.</span> <span class="toc-text">前言：Vibe Coding 的困境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSDD%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">什么是SDD？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SDD-vs-%E4%BC%A0%E7%BB%9F%E5%BC%80%E5%8F%91-vs-Vibe-Coding"><span class="toc-number">1.2.1.</span> <span class="toc-text">SDD vs 传统开发 vs Vibe Coding</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Open-Spec%EF%BC%9A%E8%AE%A9Spec%E6%88%90%E4%B8%BA%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91"><span class="toc-number">1.3.</span> <span class="toc-text">Open Spec：让Spec成为一等公民</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Spec%E5%BA%94%E8%AF%A5%E6%98%AF%E6%9C%BA%E5%99%A8%E5%8F%AF%E8%AF%BB%E7%9A%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. Spec应该是机器可读的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Spec%E5%BA%94%E8%AF%A5%E6%98%AF%E7%89%88%E6%9C%AC%E5%8C%96%E7%9A%84"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Spec应该是版本化的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Spec%E5%BA%94%E8%AF%A5%E6%98%AF%E5%8F%AF%E6%B5%8B%E8%AF%95%E7%9A%84"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. Spec应该是可测试的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Spec%E5%BA%94%E8%AF%A5%E6%98%AF%E5%BC%80%E6%94%BE%E5%85%B1%E4%BA%AB%E7%9A%84"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. Spec应该是开放共享的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Superpowers%EF%BC%9ASDD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.4.</span> <span class="toc-text">Superpowers：SDD的工程化实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Phase-1-Brainstorming%EF%BC%88%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4%EF%BC%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">Phase 1: Brainstorming（头脑风暴）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phase-2-Writing-Plans%EF%BC%88%E7%BC%96%E5%86%99%E8%AE%A1%E5%88%92%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">Phase 2: Writing Plans（编写计划）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phase-3-Subagent-Driven-Development%EF%BC%88%E5%AD%90%E4%BB%A3%E7%90%86%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%EF%BC%89"><span class="toc-number">1.4.3.</span> <span class="toc-text">Phase 3: Subagent-Driven Development（子代理驱动开发）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phase-4-Systematic-Debugging%EF%BC%88%E7%B3%BB%E7%BB%9F%E5%8C%96%E8%B0%83%E8%AF%95%EF%BC%89"><span class="toc-number">1.4.4.</span> <span class="toc-text">Phase 4: Systematic Debugging（系统化调试）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phase-5-Finishing-Branch%EF%BC%88%E5%AE%8C%E6%88%90%E5%88%86%E6%94%AF%EF%BC%89"><span class="toc-number">1.4.5.</span> <span class="toc-text">Phase 5: Finishing Branch（完成分支）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%EF%BC%9A%E4%B8%80%E4%B8%AASDD%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BC%80%E5%8F%91%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.</span> <span class="toc-text">实战：一个SDD驱动的开发示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9D%8C-Vibe-Coding-%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.1.</span> <span class="toc-text">❌ Vibe Coding 方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-SDD-Superpowers-%E6%96%B9%E5%BC%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">✅ SDD + Superpowers 方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SDD%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="toc-number">1.6.</span> <span class="toc-text">SDD的核心优势</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Spec%E5%8D%B3%E6%96%87%E6%A1%A3"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. Spec即文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-AI%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. AI的确定性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E5%AE%A1%E8%AE%A1%E6%80%A7"><span class="toc-number">1.6.3.</span> <span class="toc-text">3. 可审计性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%9C%9F%E6%AD%A3%E7%9A%84TDD"><span class="toc-number">1.6.4.</span> <span class="toc-text">4. 真正的TDD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C%E7%9A%84%E6%9C%80%E4%BD%B3%E5%88%86%E5%B7%A5"><span class="toc-number">1.6.5.</span> <span class="toc-text">5. 人机协作的最佳分工</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SDD%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%8C%91%E6%88%98"><span class="toc-number">1.7.</span> <span class="toc-text">SDD的边界与挑战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E5%90%88SDD%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">1.7.1.</span> <span class="toc-text">适合SDD的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%A4%AA%E9%80%82%E5%90%88%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">1.7.2.</span> <span class="toc-text">不太适合的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E6%8C%91%E6%88%98"><span class="toc-number">1.7.3.</span> <span class="toc-text">实践中的挑战</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B%EF%BC%9ASpec-First-%E7%9A%84AI%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91"><span class="toc-number">1.8.</span> <span class="toc-text">未来展望：Spec-First 的AI原生开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.9.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.10.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" title="SDD驱动AI开发：当Open Spec遇上Superpowers"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SDD驱动AI开发：当Open Spec遇上Superpowers"/></a><div class="content"><a class="title" href="/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" title="SDD驱动AI开发：当Open Spec遇上Superpowers">SDD驱动AI开发：当Open Spec遇上Superpowers</a><time datetime="2026-05-30T10:11:33.000Z" title="发表于 2026-05-30 18:11:33">2026-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/30/Hermes-agent-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="Hermes Agent 的安装与使用"><img src="https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hermes Agent 的安装与使用"/></a><div class="content"><a class="title" href="/2026/04/30/Hermes-agent-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="Hermes Agent 的安装与使用">Hermes Agent 的安装与使用</a><time datetime="2026-04-30T09:06:00.000Z" title="发表于 2026-04-30 17:06:00">2026-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/30/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="JS设计模式-代理模式"><img src="https://s2.loli.net/2024/04/14/ZxojA43sn1HWCiB.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS设计模式-代理模式"/></a><div class="content"><a class="title" href="/2024/04/30/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="JS设计模式-代理模式">JS设计模式-代理模式</a><time datetime="2024-04-29T16:52:06.000Z" title="发表于 2024-04-30 00:52:06">2024-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/14/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" title="JS设计模式-策略模式"><img src="https://s2.loli.net/2024/04/14/PI3fcUwVQhiStEK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS设计模式-策略模式"/></a><div class="content"><a class="title" href="/2024/04/14/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" title="JS设计模式-策略模式">JS设计模式-策略模式</a><time datetime="2024-04-14T09:02:24.000Z" title="发表于 2024-04-14 17:02:24">2024-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/12/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E5%88%97%E6%A8%A1%E5%BC%8F/" title="JS设计模式-单列模式"><img src="https://s2.loli.net/2024/04/14/PRamo5sxw9ithZK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS设计模式-单列模式"/></a><div class="content"><a class="title" href="/2024/04/12/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8D%95%E5%88%97%E6%A8%A1%E5%BC%8F/" title="JS设计模式-单列模式">JS设计模式-单列模式</a><time datetime="2024-04-12T06:39:37.000Z" title="发表于 2024-04-12 14:39:37">2024-04-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By CHUYUXUAN</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><span class="footer-separator">|</span><span>Design By </span><a href="https://blog.chuyuxuan.top">CHUYUXUAN</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '4VHYBgLfdjw6zhs1Ep46acMw-gzGzoHsz',
+      appKey: 't4eW4wzuDJuIU1McV0Ir9Dzq',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
