@@ -227,8 +227,8 @@
 
   if (typeof Waline === 'object') initWaline()
   else {
-    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
-      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js').then(initWaline)
     })
   }
 }
