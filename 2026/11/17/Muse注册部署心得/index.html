@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检 | CHUYUXUAN</title><meta name="author" content="chuyuxuan"><meta name="copyright" content="chuyuxuan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检前言：前任太占地方了站里之前写过一篇《Hermes-agent 的安装与使用》，那是我把 AI Agent 直接装进服务器的尝试。装完才发现，我这台服务器只有 2 核 CPU、1.6 GB 内存，一个本地 Agent 常驻下来，光它的目录就占了 2.9 GB 磁盘，内存也一直紧巴巴。 后来我想通了：Agent 不必住在服务器里。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检">
+<meta property="og:url" content="https://blog.chuyuxuan.top/2026/11/17/Muse%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="CHUYUXUAN">
+<meta property="og:description" content="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检前言：前任太占地方了站里之前写过一篇《Hermes-agent 的安装与使用》，那是我把 AI Agent 直接装进服务器的尝试。装完才发现，我这台服务器只有 2 核 CPU、1.6 GB 内存，一个本地 Agent 常驻下来，光它的目录就占了 2.9 GB 磁盘，内存也一直紧巴巴。 后来我想通了：Agent 不必住在服务器里。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.chuyuxuan.top/img/muse-cover-blue-whale.jpg">
+<meta property="article:published_time" content="2026-11-17T10:20:00.000Z">
+<meta property="article:modified_time" content="2026-11-17T10:38:42.333Z">
+<meta property="article:author" content="chuyuxuan">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Muse">
+<meta property="article:tag" content="服务器运维">
+<meta property="article:tag" content="SSH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.chuyuxuan.top/img/muse-cover-blue-whale.jpg"><link rel="shortcut icon" href="/img/favicon1.ico"><link rel="canonical" href="https://blog.chuyuxuan.top/2026/11/17/Muse%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?66e8bfee2641f792cfb4b22b2cf76e0e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-11-17 18:38:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">82</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-book"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="CHUYUXUAN"></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-book"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-11-17T10:20:00.000Z" title="发表于 2026-11-17 18:20:00">2026-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-11-17T10:38:42.333Z" title="更新于 2026-11-17 18:38:42">2026-11-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text&#x2F;css" href="https://cdn.jsdelivr.net/npm/hexo-tag-hint@0.3.1/dist/hexo-tag-hint.min.css"><h1 id="Muse-注册部署心得：把生产服务器交给-AI-管之前，先让它只读巡检"><a href="#Muse-注册部署心得：把生产服务器交给-AI-管之前，先让它只读巡检" class="headerlink" title="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检"></a>Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检</h1><h2 id="前言：前任太占地方了"><a href="#前言：前任太占地方了" class="headerlink" title="前言：前任太占地方了"></a>前言：前任太占地方了</h2><p>站里之前写过一篇《Hermes-agent 的安装与使用》，那是我把 AI Agent 直接装进服务器的尝试。装完才发现，我这台服务器只有 2 核 CPU、1.6 GB 内存，一个本地 Agent 常驻下来，光它的目录就占了 2.9 GB 磁盘，内存也一直紧巴巴。</p>
+<p>后来我想通了：Agent 不必住在服务器里。让它住在云端，我这边只给它留一条 SSH 通道，服务器该跑业务跑业务，一点不挤。这篇文章就是这次“换岗”的记录：注册 Muse、把它调教成顺手的样子，最后让它接手这台生产服务器的日常运维。</p>
+<h2 id="一、注册：最难的一步"><a href="#一、注册：最难的一步" class="headerlink" title="一、注册：最难的一步"></a>一、注册：最难的一步</h2><p>说出来有点反直觉：整个流程里最难的反而是注册这一步，难倒了一大批人。它对网络环境相当挑剔——IP 必须“干净”，最好是家庭宽带的出口；机房 IP、共享代理、来路不明的 VPN 节点，很容易直接触发风控。</p>
+<p>我自己的号就是这么下来的。先是挂着平时用的节点兴冲冲去注册，页面转了半天圈，最后甩给我一个验证失败；不死心，又换了两三个节点，一个比一个慢，好不容易有一个走到了提交，又被拦了。当时还纳闷，这产品是怕人用还是怎么的。后来刷到别人的吐槽才知道，要用家里宽带那种“干净”的 IP。当晚回家连上 Wi-Fi，一次过，前后不到五分钟。合着我之前折腾的那两个小时，全耗在跟风控斗智斗勇上了。</p>
+<p>熬过这一步，后面反而都顺了：</p>
+<ul>
+<li><strong>邀请码入口藏得有点深</strong>：网页版在「设置 → 通用 → 用量」里兑换；手机 App 在设置里填，而且兑换窗口有限，拿到码尽早用。</li>
+<li><strong>多端是同一个账号</strong>：网页、Mac App、iOS App 登录同一个号就能无缝接续，聊天记录、记忆、设置全同步。Windows 暂时没有桌面 App，用网页版即可，功能没缺。</li>
+<li><strong>手机配对值得一开</strong>：把 iPhone 配对进来之后，它能读到提醒事项、日历这些信息，很多事不用我再手动转述。</li>
+</ul>
+<h2 id="二、先让它“认识你”"><a href="#二、先让它“认识你”" class="headerlink" title="二、先让它“认识你”"></a>二、先让它“认识你”</h2><p>普通聊天机器人是聊完就忘，Muse 有一套长期记忆：称呼偏好、语言习惯、正在推进的目标，它都会存下来，下次对话直接接着用。</p>
+<p>我的配置是：称呼我为“主人”，文字用中文、不用敬称，语音条用英文音色。这些听着像小事，但配合久了会发现，不用重复交代背景才是 AI 助手真正的效率来源——我甚至把“减脂到 70 公斤”的计划和一个重要纪念日的第 1000 天提醒都托管给了它，每天定点巡检、到点提醒，比我自己记日历靠谱。</p>
+<h2 id="三、部署重头戏：让它接手服务器运维"><a href="#三、部署重头戏：让它接手服务器运维" class="headerlink" title="三、部署重头戏：让它接手服务器运维"></a>三、部署重头戏：让它接手服务器运维</h2><h3 id="1-先分清：它的电脑不是你的服务器"><a href="#1-先分清：它的电脑不是你的服务器" class="headerlink" title="1. 先分清：它的电脑不是你的服务器"></a>1. 先分清：它的电脑不是你的服务器</h3><p>Muse 有一台自己的云端“工位机”（大概 1.5 核共享算力、6 GB 内存的 Linux 沙箱），浏览器就跑在上面，配置不高，而且会被平台定期回收重建。它适合干活，不适合当生产机。真正的生产服务器还是我这台阿里云 ECS（Debian 13，2 核 &#x2F; 1.6 GB &#x2F; 40 GB 盘），跑着 nginx、MariaDB、Waline 评论和几个小服务。</p>
+<h3 id="2-第一个坑：出站-SSH-默认是关的"><a href="#2-第一个坑：出站-SSH-默认是关的" class="headerlink" title="2. 第一个坑：出站 SSH 默认是关的"></a>2. 第一个坑：出站 SSH 默认是关的</h3><p>我把 <code>root@服务器IP</code> 发给它让它试连，连接刚建立就被它那边的权限网关掐了，提示写得很直白：需要在 <strong>Muse 设置 → 权限（Permissions）→ Direct network protocols</strong> 里，把 <strong>ssh 从 Deny 改成 Ask</strong>。改完之后每次连接都会走授权确认，这其实是个好设计——权限在自己手里收放。</p>
+<h3 id="3-密钥登录，别给密码"><a href="#3-密钥登录，别给密码" class="headerlink" title="3. 密钥登录，别给密码"></a>3. 密钥登录，别给密码</h3><p>我在服务器上把它的 SSH 公钥加进 <code>~/.ssh/authorized_keys</code>，全程没有在聊天里发过任何密码或私钥。这里还有个小坑：它的运行环境里家目录不固定，连接时要<strong>显式指定密钥路径</strong>（<code>-i</code> 到具体的 <code>id_ed25519</code>），否则会吃一个 Permission denied。</p>
+<h3 id="4-约法三章：只读起步，改动先批"><a href="#4-约法三章：只读起步，改动先批" class="headerlink" title="4. 约法三章：只读起步，改动先批"></a>4. 约法三章：只读起步，改动先批</h3><p>连通之后我没有直接放权，而是定了三条规矩：</p>
+<ol>
+<li><strong>先只读巡检</strong>：系统版本、负载、内存、磁盘、服务状态、监听端口、容器健康，只看不动。</li>
+<li><strong>每天定时巡检，异常才告警</strong>：巡检定在每天上午约 9:24，磁盘、内存、关键服务、SSH 爆破次数这些出问题才来喊我，全绿就保持沉默。</li>
+<li><strong>任何改动先报备</strong>：改配置、重启服务、删文件，一律先说明方案，等我确认。</li>
+</ol>
+<p>第一件让它动手的事，是卸载之前那位“前任”Hermes：先把配置打包备份，再删除目录和命令文件，释放约 3 GB，删完立刻复查所有关键服务——全绿。顺带把服务器的 git 提交身份改成了它的署名（Aina-大肥鱼），以后谁提交的一目了然。这台机器的 GitHub 凭据本来就在（服务器密钥绑着我的 GitHub 账号），所以它拉代码、推博客仓库都是现成通道。</p>
+<h2 id="四、几点心得"><a href="#四、几点心得" class="headerlink" title="四、几点心得"></a>四、几点心得</h2><p>这次换岗让我确认了两件事。第一，权限这东西，够用就行，不用贪多：Ask 模式加密钥登录，再加只读起步，出了问题也烧不到业务。下一步我打算关掉 root 的密码登录，只留密钥。第二，流程比“聪明”重要：巡检、报告、确认、执行、复查，一步一步走，比它自作主张瞎折腾强得多。小机器也别硬塞本地 Agent，云端 Agent 加一条 SSH 通道，轻得多，也稳得多。</p>
+<p>还有一点是这次才体会到的：它记得这台机器的服务清单、博客的部署链路（源码仓 → GitHub Pages → CDN）、甚至证书到期时间。运维最怕的就是“上次是怎么配的来着”，现在不用怕了。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>这篇博客本身就是新流程的产物：我在聊天里丢了个题目，它在服务器的博客仓库里起草，署名 Aina-大肥鱼，我过目点头之后才发布。从“自己运维”到“指挥 AI 运维”，心态转变大概就是一句话——重复的活交出去，拍板的事留给自己。</p>
+<p>下一篇预告：给这台小机器做一次完整的安全加固（关密码登录、收公网端口、备份策略），过程同样会让它先出方案、我再批。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://blog.chuyuxuan.top">chuyuxuan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.chuyuxuan.top/2026/11/17/Muse%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97/">https://blog.chuyuxuan.top/2026/11/17/Muse注册部署心得/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.chuyuxuan.top" target="_blank">CHUYUXUAN</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Muse/">Muse</a><a class="post-meta__tags" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4/">服务器运维</a><a class="post-meta__tags" href="/tags/SSH/">SSH</a></div><div class="post_share"><div class="social-share" data-image="/img/muse-cover-blue-whale.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" title="SDD驱动AI开发：当Open Spec遇上Superpowers"><img class="cover" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SDD驱动AI开发：当Open Spec遇上Superpowers</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">chuyuxuan</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">82</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Chuyuxuan0v0"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Muse-%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97%EF%BC%9A%E6%8A%8A%E7%94%9F%E4%BA%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%A4%E7%BB%99-AI-%E7%AE%A1%E4%B9%8B%E5%89%8D%EF%BC%8C%E5%85%88%E8%AE%A9%E5%AE%83%E5%8F%AA%E8%AF%BB%E5%B7%A1%E6%A3%80"><span class="toc-number">1.</span> <span class="toc-text">Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%89%8D%E4%BB%BB%E5%A4%AA%E5%8D%A0%E5%9C%B0%E6%96%B9%E4%BA%86"><span class="toc-number">1.1.</span> <span class="toc-text">前言：前任太占地方了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B3%A8%E5%86%8C%EF%BC%9A%E6%9C%80%E9%9A%BE%E7%9A%84%E4%B8%80%E6%AD%A5"><span class="toc-number">1.2.</span> <span class="toc-text">一、注册：最难的一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%85%88%E8%AE%A9%E5%AE%83%E2%80%9C%E8%AE%A4%E8%AF%86%E4%BD%A0%E2%80%9D"><span class="toc-number">1.3.</span> <span class="toc-text">二、先让它“认识你”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%83%A8%E7%BD%B2%E9%87%8D%E5%A4%B4%E6%88%8F%EF%BC%9A%E8%AE%A9%E5%AE%83%E6%8E%A5%E6%89%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4"><span class="toc-number">1.4.</span> <span class="toc-text">三、部署重头戏：让它接手服务器运维</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%88%E5%88%86%E6%B8%85%EF%BC%9A%E5%AE%83%E7%9A%84%E7%94%B5%E8%84%91%E4%B8%8D%E6%98%AF%E4%BD%A0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.1.</span> <span class="toc-text">1. 先分清：它的电脑不是你的服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%9D%91%EF%BC%9A%E5%87%BA%E7%AB%99-SSH-%E9%BB%98%E8%AE%A4%E6%98%AF%E5%85%B3%E7%9A%84"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 第一个坑：出站 SSH 默认是关的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%EF%BC%8C%E5%88%AB%E7%BB%99%E5%AF%86%E7%A0%81"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 密钥登录，别给密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BA%A6%E6%B3%95%E4%B8%89%E7%AB%A0%EF%BC%9A%E5%8F%AA%E8%AF%BB%E8%B5%B7%E6%AD%A5%EF%BC%8C%E6%94%B9%E5%8A%A8%E5%85%88%E6%89%B9"><span class="toc-number">1.4.4.</span> <span class="toc-text">4. 约法三章：只读起步，改动先批</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%87%A0%E7%82%B9%E5%BF%83%E5%BE%97"><span class="toc-number">1.5.</span> <span class="toc-text">四、几点心得</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE"><span class="toc-number">1.6.</span> <span class="toc-text">结尾</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/11/17/Muse%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97/" title="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检"><img src="/img/muse-cover-blue-whale.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检"/></a><div class="content"><a class="title" href="/2026/11/17/Muse%E6%B3%A8%E5%86%8C%E9%83%A8%E7%BD%B2%E5%BF%83%E5%BE%97/" title="Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检">Muse 注册部署心得：把生产服务器交给 AI 管之前，先让它只读巡检</a><time datetime="2026-11-17T10:20:00.000Z" title="发表于 2026-11-17 18:20:00">2026-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" title="SDD驱动AI开发：当Open Spec遇上Superpowers"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SDD驱动AI开发：当Open Spec遇上Superpowers"/></a><div class="content"><a class="title" href="/2026/05/30/%E6%9D%A5%E4%BB%94%E7%BB%86%E8%81%8A%E8%81%8ASSD%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91/" title="SDD驱动AI开发：当Open Spec遇上Superpowers">SDD驱动AI开发：当Open Spec遇上Superpowers</a><time datetime="2026-05-30T10:11:33.000Z" title="发表于 2026-05-30 18:11:33">2026-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/04/30/Hermes-agent-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="Hermes Agent 的安装与使用"><img src="https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/banner.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hermes Agent 的安装与使用"/></a><div class="content"><a class="title" href="/2026/04/30/Hermes-agent-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="Hermes Agent 的安装与使用">Hermes Agent 的安装与使用</a><time datetime="2026-04-30T09:06:00.000Z" title="发表于 2026-04-30 17:06:00">2026-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/29/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="JS设计模式-代理模式"><img src="https://s2.loli.net/2024/04/14/ZxojA43sn1HWCiB.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS设计模式-代理模式"/></a><div class="content"><a class="title" href="/2024/04/29/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="JS设计模式-代理模式">JS设计模式-代理模式</a><time datetime="2024-04-29T16:52:06.000Z" title="发表于 2024-04-30 00:52:06">2024-04-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/14/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" title="JS设计模式-策略模式"><img src="https://s2.loli.net/2024/04/14/PI3fcUwVQhiStEK.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS设计模式-策略模式"/></a><div class="content"><a class="title" href="/2024/04/14/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" title="JS设计模式-策略模式">JS设计模式-策略模式</a><time datetime="2024-04-14T09:02:24.000Z" title="发表于 2024-04-14 17:02:24">2024-04-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By CHUYUXUAN</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a><span class="footer-separator">|</span><span>Design By </span><a href="https://blog.chuyuxuan.top">CHUYUXUAN</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://api.chuyuxuan.top/waline',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client@v2/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
